@@ -28,9 +28,13 @@ main {
 
 .game-field {
   background-color: var(--field-pixel);
-  border: 2px solid var(--start-btn-bg);
+  border: 2px solid var(--field-boarder);
   border-radius: 8px;
   margin: 16px 0 32px 0;
+}
+
+.game-field.start {
+  border: 2px solid var(--start-btn-bg);
 }
 
 .game-field.game-over {

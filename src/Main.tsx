@@ -106,7 +106,7 @@ const Game: React.FC = () => {
     }
 
     setSnake(newSnake);
-  }, [snake, direction, food]);
+  }, [snake, direction, food, speed]);
 
   const generateNewFood = () => {
     const newFood: Position = {
@@ -144,6 +144,13 @@ const Game: React.FC = () => {
     gameRunning.current = true;
   };
 
+  const makeClassName = () => {
+    if (gameRunning.current && !gameOver) return "game-field start";
+    if (!gameRunning.current && gameOver) return "game-field game-over";
+
+    return "game-field";
+  };
+
   return (
     <main>
       {/* INIT GAME */}
@@ -165,7 +172,7 @@ const Game: React.FC = () => {
       )}
 
       {/* RUNNING GAME */}
-      <div className={!gameOver ? "game-field" : "game-field game-over"}>
+      <div className={makeClassName()}>
         {fieldArray.map((_, row) => (
           <div className="field-row" key={row}>
             {fieldArray.map((_, col) => (
@@ -180,7 +187,6 @@ const Game: React.FC = () => {
           </div>
         ))}
       </div>
-      {/* <div>Score: {score}</div> */}
       <InfoText text={`Score: ${score}`} />
     </main>
   );

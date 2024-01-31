@@ -45,7 +45,7 @@ export const Dialog: React.FC<IDialog> = ({ text, type, startGameHandler }) => {
     <div className="modal">
       <dialog className={makeClass("dialog")}>
         <h2 className={makeClass("dialog-title")}>
-          {type === "start" ? "Welcome!" : "GAME OVER"}
+          {type === "start" ? "Hello Gamer!" : "GAME OVER"}
         </h2>
 
         {type === "end" && (
