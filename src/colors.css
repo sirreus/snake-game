@@ -1,0 +1,15 @@
+:root {
+  --app-bg: #282c34;
+  --field-boarder: #aab7d2;
+  --field-pixel: #272727;
+  --snake: #55ae27;
+  --food: #dfc278;
+  --text: white;
+
+  --start-btn-bg: #0a820a;
+  --start-btn-text: #c0f0cd;
+
+  --dialog-game-over-bg: #d2aaaa;
+  --dialog-game-over-title: #811414;
+  --dialog-game-over-text: #552d2d;
+}

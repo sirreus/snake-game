@@ -1,0 +1,14 @@
+@import "../../colors.css";
+
+.field-pixel {
+  width: 10px;
+  height: 10px;
+  border-radius: 8px;
+}
+
+.field-pixel.snake {
+  background-color: var(--snake);
+}
+.field-pixel.food {
+  background-color: var(--food);
+}

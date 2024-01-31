@@ -1,0 +1,12 @@
+@import "../../colors.css";
+
+.start-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: var(--start-btn-bg);
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--start-btn-text);
+  cursor: pointer;
+}
