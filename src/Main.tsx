@@ -20,7 +20,7 @@ const Game: React.FC = () => {
   const [direction, setDirection] = useState<Direction>("RIGHT");
   const [score, setScore] = useState<number>(0);
   const [speed, setSpeed] = useState<number>(INITIAL_SPEED);
-  const gameRunning = useRef(true);
+  const gameRunning = useRef(false);
 
   const fieldArray = Array.from({ length: GRID_SIZE });
 
@@ -146,13 +146,25 @@ const Game: React.FC = () => {
 
   return (
     <main>
-      {gameOver && (
+      {/* INIT GAME */}
+      {!gameRunning.current && !gameOver && (
+        <Dialog
+          type="start"
+          text={`Your score is ${score}`}
+          startGameHandler={() => startGame()}
+        />
+      )}
+
+      {/* GAME OVER */}
+      {!gameRunning.current && gameOver && (
         <Dialog
           type="end"
           text={`Your score is ${score}`}
           startGameHandler={() => startGame()}
         />
       )}
+
+      {/* RUNNING GAME */}
       <div className={!gameOver ? "game-field" : "game-field game-over"}>
         {fieldArray.map((_, row) => (
           <div className="field-row" key={row}>
