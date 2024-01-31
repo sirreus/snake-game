@@ -14,6 +14,7 @@ interface Position {
 }
 
 const Game: React.FC = () => {
+  const [userName, setUserName] = useState<string | null>(null);
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [snake, setSnake] = useState<Position[]>([{ x: 25, y: 25 }]);
   const [food, setFood] = useState<Position>({ x: 10, y: 10 });
@@ -151,44 +152,51 @@ const Game: React.FC = () => {
     return "game-field";
   };
 
+  if (gameRunning.current && !userName) {
+    setUserName(sessionStorage.getItem("userName"));
+  }
+
   return (
-    <main>
-      {/* INIT GAME */}
-      {!gameRunning.current && !gameOver && (
-        <Dialog
-          type="start"
-          text={`Your score is ${score}`}
-          startGameHandler={() => startGame()}
-        />
-      )}
+    <>
+      <main>
+        {userName && <InfoText text={`${userName}`} />}
+        {/* INIT GAME */}
+        {!gameRunning.current && !gameOver && (
+          <Dialog
+            type="start"
+            text={`Your score is ${score}`}
+            startGameHandler={() => startGame()}
+          />
+        )}
 
-      {/* GAME OVER */}
-      {!gameRunning.current && gameOver && (
-        <Dialog
-          type="end"
-          text={`Your score is ${score}`}
-          startGameHandler={() => startGame()}
-        />
-      )}
+        {/* GAME OVER */}
+        {!gameRunning.current && gameOver && (
+          <Dialog
+            type="end"
+            text={`Your score is ${score}`}
+            startGameHandler={() => startGame()}
+          />
+        )}
 
-      {/* RUNNING GAME */}
-      <div className={makeClassName()}>
-        {fieldArray.map((_, row) => (
-          <div className="field-row" key={row}>
-            {fieldArray.map((_, col) => (
-              <Pixel
-                snakePosition={snake}
-                foodPosition={food}
-                currentColumn={col}
-                currentRow={row}
-                key={col}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
-      <InfoText text={`Score: ${score}`} />
-    </main>
+        {/* RUNNING GAME */}
+        <div className={makeClassName()}>
+          {fieldArray.map((_, row) => (
+            <div className="field-row" key={row}>
+              {fieldArray.map((_, col) => (
+                <Pixel
+                  snakePosition={snake}
+                  foodPosition={food}
+                  currentColumn={col}
+                  currentRow={row}
+                  key={col}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+        <InfoText text={`Score: ${score}`} />
+      </main>
+    </>
   );
 };
 
