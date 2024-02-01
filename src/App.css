@@ -49,6 +49,11 @@ main {
 }
 
 @media screen and (max-width: 768px) {
+  html,
+  body {
+    overscroll-behavior-y: contain;
+  }
+
   .header {
     position: fixed;
     top: 32px;
