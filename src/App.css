@@ -1,5 +1,9 @@
 @import "./colors.css";
 
+#root {
+  height: 100%;
+}
+
 .game {
   display: flex;
   flex-direction: column;
