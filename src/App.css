@@ -44,3 +44,14 @@ main {
 .field-row {
   display: flex;
 }
+
+@media screen and (max-width: 768px) {
+  .header {
+    position: fixed;
+    top: 32px;
+  }
+
+  main {
+    width: fit-content;
+  }
+}

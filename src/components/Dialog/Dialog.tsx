@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
+import { useMobile } from "../../hooks/useMobile";
+
 import StartButton from "../StartButton";
 import { GameDescription } from "./components/GameDescription";
+import { DialogNameForm } from "./components/DialogNameForm";
 
 import "./styles.css";
-import { DialogNameForm } from "./components/DialogNameForm";
 
 type DialogType = "start" | "end";
 
@@ -15,6 +17,7 @@ interface IDialog {
 }
 
 export const Dialog: React.FC<IDialog> = ({ text, type, startGameHandler }) => {
+  const isMobile = useMobile();
   const [userName, setUserName] = useState<string | null>(null);
 
   const nameFromStorage = sessionStorage.getItem("userName");
@@ -49,7 +52,7 @@ export const Dialog: React.FC<IDialog> = ({ text, type, startGameHandler }) => {
           <span className={makeClass("dialog-text")}>{text}</span>
         )}
 
-        {type === "start" && <GameDescription />}
+        {type === "start" && <GameDescription isMobile={isMobile} />}
 
         <StartButton
           text={type === "start" ? "Start!" : "Start again!"}
