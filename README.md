@@ -7,11 +7,11 @@ Simple Classic Snake game developed by React + Typescript.
 
 In this game, you have a playing field measuring 50x50 points. Objects (food) randomly appear on this Field, which must be “eaten” by your snake, also located on this Field. The snake's movement is set automatically, you only control the direction of the snake itself, and its movement speed increases by 0.2 points for each food eaten.
 
-The snake is controlled using the buttons on the keyboard: **UP, RIGHT, DOWN, LEFT** (arrows).
+The snake is controlled using the buttons on the keyboard: **UP, RIGHT, DOWN, LEFT** (arrows). Or by swipes on your mobile phone screen in these directions.
 
 The game ends:
 
-- if the snake eats itself (_for example, your snake moves to the LEFT, and you pressed the RIGHT key_)
+- if the snake eats itself when the snake is grown (_for example, your snake moves to the LEFT, and you pressed the RIGHT key_)
 - if the snake has a neck (_more than one square in size_) and crosses the field's border.
 
 ## Available Scripts

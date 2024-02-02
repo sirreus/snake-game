@@ -38,11 +38,20 @@ const Game: React.FC = () => {
 
   const fieldArray = Array.from({ length: GRID });
 
+  const generateNewFood = useCallback(() => {
+    const newFood: Position = {
+      x: Math.floor(Math.random() * GRID),
+      y: Math.floor(Math.random() * GRID),
+    };
+    setFood(newFood);
+  }, [GRID]);
+
   const startGame = () => {
-    setSnake(initSnakePosition);
-    setDirection("RIGHT");
     setScore(0);
     setSpeed(INITIAL_SPEED);
+    setSnake(initSnakePosition);
+    setDirection("RIGHT");
+    generateNewFood();
     setGameOver(false);
     gameRunning.current = true;
   };
@@ -52,33 +61,7 @@ const Game: React.FC = () => {
     gameRunning.current = false;
   };
 
-  const generateNewFood = () => {
-    const newFood: Position = {
-      x: Math.floor(Math.random() * GRID),
-      y: Math.floor(Math.random() * GRID),
-    };
-    setFood(newFood);
-  };
-
-  const handleKeyPress = useCallback((event: KeyboardEvent) => {
-    switch (event.key) {
-      case "ArrowUp":
-        setDirection("UP");
-        break;
-      case "ArrowDown":
-        setDirection("DOWN");
-        break;
-      case "ArrowLeft":
-        setDirection("LEFT");
-        break;
-      case "ArrowRight":
-        setDirection("RIGHT");
-        break;
-      default:
-        break;
-    }
-  }, []);
-
+  // MOBILE movements by swipe on screen
   const handleTouchStart = useCallback((e: TouchEvent) => {
     const { clientX, clientY } = e.touches[0];
     setSwipeCoords({ startX: clientX, startY: clientY });
@@ -112,6 +95,26 @@ const Game: React.FC = () => {
     },
     [swipeCoords]
   );
+
+  // DESKTOP movements by keyboard's button
+  const handleKeyPress = useCallback((event: KeyboardEvent) => {
+    switch (event.key) {
+      case "ArrowUp":
+        setDirection("UP");
+        break;
+      case "ArrowDown":
+        setDirection("DOWN");
+        break;
+      case "ArrowLeft":
+        setDirection("LEFT");
+        break;
+      case "ArrowRight":
+        setDirection("RIGHT");
+        break;
+      default:
+        break;
+    }
+  }, []);
 
   const gameController = useCallback(() => {
     if (!gameRunning.current) return;
@@ -176,7 +179,7 @@ const Game: React.FC = () => {
     }
 
     setSnake(newSnake);
-  }, [snake, direction, food, speed, GRID]);
+  }, [snake, direction, food, speed, GRID, generateNewFood]);
 
   useEffect(() => {
     // Setup keyboard event listener

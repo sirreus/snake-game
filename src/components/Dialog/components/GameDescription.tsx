@@ -33,7 +33,9 @@ export const GameDescription: React.FC<IGameDescription> = ({ isMobile }) => (
       <b>YOU LOSE IF: </b>
     </p>
     <ul style={{ margin: "0 0 8px 0" }}>
-      <li className="dialog-text start">the snake eats itself</li>
+      <li className="dialog-text start">
+        the snake eats itself when the snake is grown
+      </li>
       <li className="dialog-text start">
         the snake crosses the field's border
       </li>
