@@ -3,17 +3,17 @@ import React from "react";
 interface IDialogNameForm {
   inputName: string | null;
   onInputChange: (input: string) => void;
-  savedName: string | null;
+  isUserName: boolean;
 }
 
 export const DialogNameForm: React.FC<IDialogNameForm> = ({
   inputName,
   onInputChange,
-  savedName,
+  isUserName,
 }) => {
   return (
     <form className="name-form">
-      {savedName ? (
+      {isUserName ? (
         <span
           className="dialog-text start"
           style={{ width: "100%", textAlign: "center" }}

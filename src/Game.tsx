@@ -221,7 +221,8 @@ const Game: React.FC = () => {
   };
 
   if (gameRunning.current && !userName) {
-    setUserName(sessionStorage.getItem("userName"));
+    const savedName = sessionStorage.getItem("userName");
+    Boolean(savedName) ? setUserName(savedName) : setUserName(null);
   }
 
   return (

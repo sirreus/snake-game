@@ -8,6 +8,8 @@ import { DialogNameForm } from "./components/DialogNameForm";
 
 import "./styles.css";
 
+const DEFAULT_NAME = "Player 1";
+
 type DialogType = "start" | "end";
 
 interface IDialog {
@@ -21,12 +23,16 @@ export const Dialog: React.FC<IDialog> = ({ text, type, startGameHandler }) => {
   const [userName, setUserName] = useState<string | null>(null);
 
   const nameFromStorage = sessionStorage.getItem("userName");
+  const isUserName =
+    Boolean(nameFromStorage) && nameFromStorage !== DEFAULT_NAME;
+
+  const helloText = isUserName ? `Hello ${nameFromStorage}!` : `Hello Gamer!`;
 
   const makeClass = (baseClass: string) =>
     [baseClass, type === "start" ? "start" : "game-over"].join(" ");
 
   const startGame = () => {
-    if (userName) sessionStorage.setItem("userName", userName);
+    sessionStorage.setItem("userName", userName || DEFAULT_NAME);
 
     startGameHandler();
   };
@@ -35,16 +41,14 @@ export const Dialog: React.FC<IDialog> = ({ text, type, startGameHandler }) => {
     <div className="modal">
       <dialog className={makeClass("dialog")}>
         <h2 className={makeClass("dialog-title")}>
-          {type === "start"
-            ? `Hello ${nameFromStorage || "Gamer"}!`
-            : "GAME OVER"}
+          {type === "start" ? helloText : "GAME OVER"}
         </h2>
 
         {type === "start" && (
           <DialogNameForm
             inputName={userName}
             onInputChange={setUserName}
-            savedName={nameFromStorage}
+            isUserName={isUserName}
           />
         )}
 
